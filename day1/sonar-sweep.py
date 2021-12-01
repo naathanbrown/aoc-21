@@ -1,7 +1,5 @@
 with open('input-part1.txt') as f:
-    sonar_input = f.read().splitlines() 
-
-sonar_input = list(map(int, sonar_input))
+    sonar_input = list(map(int, f.read().splitlines())) 
 
 increase_count = 0
 last_depth = None
