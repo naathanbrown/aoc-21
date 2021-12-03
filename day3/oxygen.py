@@ -1,57 +1,46 @@
+def calculate_bit_criterion(binary_list, criteria):
+
+    binary_len = len(binary_input[0])
+
+    for i in range(binary_len):
+
+        if (len(binary_list) == 1):
+            return binary_list[0]
+    
+        counter = 0
+        for binary in binary_list:
+            if binary[i] == "1":
+                counter += 1
+            else:
+                counter -= 1
+
+        if criteria == "most":
+            if counter >= 0:
+                common_value = "1"
+            else:
+                common_value = "0"
+        elif criteria == "least":
+            if counter >= 0:
+                common_value = "0"
+            else:
+                common_value = "1"
+        else:
+            print("must be most or least")
+            break
+
+        remove_list = []
+        for binary in binary_list:
+            if binary[i] != common_value:
+                remove_list.append(binary)
+
+        binary_list = [x for x in binary_list if x not in remove_list]
+    
+    return binary_list[0]
+
 with open('input.txt') as f:
     binary_input = f.read().splitlines()
 
-binary_most = binary_input
-binary_least = binary_input 
+oxygen = calculate_bit_criterion(binary_input, "most")
+scrubber = calculate_bit_criterion(binary_input, "least")
 
-binary_len = len(binary_input[0])
-
-for i in range(binary_len):
-
-    if (len(binary_most) == 1):
-        break
-
-    counter = 0
-    for binary in binary_most:
-        if binary[i] == "1":
-            counter += 1
-        else:
-            counter -= 1
-    
-    if counter >= 0:
-        most_common = "1"
-    else:
-        most_common = "0"
-    
-    remove_list = []
-    for binary in binary_most:
-        if binary[i] != most_common:
-            remove_list.append(binary)
-
-    binary_most = [x for x in binary_most if x not in remove_list]
-
-for i in range(binary_len):
-
-    if (len(binary_least) == 1):
-        break
-
-    counter = 0
-    for binary in binary_least:
-        if binary[i] == "1":
-            counter += 1
-        else:
-            counter -= 1
-    
-    if counter >= 0:
-        least_common = "0"
-    else:
-        least_common = "1"
-
-    remove_list = []
-    for binary in binary_least:
-        if binary[i] != least_common:
-           remove_list.append(binary)
-
-    binary_least = [x for x in binary_least if x not in remove_list]
-
-print(int(binary_least[0], 2) * int(binary_most[0], 2))
+print(int(oxygen, 2) * int(scrubber, 2))
